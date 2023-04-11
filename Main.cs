@@ -7,7 +7,11 @@ namespace TiberiTreeGen
     public class Main : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private SpriteBatch sb;
+
+        Utility utility = new Utility(33);
+
+        Branch branch;
 
         public Main()
         {
@@ -25,7 +29,9 @@ namespace TiberiTreeGen
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            sb = new SpriteBatch(GraphicsDevice);
+
+            branch = new Branch(false, sb); 
 
             // TODO: use this.Content to load your game content here
         }
@@ -35,18 +41,21 @@ namespace TiberiTreeGen
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+
+            sb.Begin();
 
             // TODO: Add your drawing code here
+            branch.draw(gameTime, sb);
 
             base.Draw(gameTime);
+
+            sb.End();
         }
     }
 }
