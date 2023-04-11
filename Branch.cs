@@ -26,19 +26,51 @@ namespace TiberiTreeGen
             this.iteration = iteration + 1;
             this.maxIterations = maxIterations;
 
-            length = Utility.randomInRange(15, 100);
+            length = Utility.randomInRange(15, 75);
 
             angle = isTrunk ? Utility.degreeToRadian(-45f) : Utility.degreeToRadian(Utility.randomInRange(-135, 45));
 
             baseLength = (float)(length * Math.Cos(angle));
 
-            _texture = Utility.createSolidTexture(sb, Color.Green);
+            _texture = getBranchColor(isTrunk, sb, iteration, maxIterations);
 
             endPosition = calcBranchEndpoint();
 
             Main.addToRenderList(this);
 
             if (iteration < maxIterations) growBranches(sb);
+        }
+
+        private Texture2D getBranchColor(bool isTrunk, SpriteBatch sb, int iteration, int maxIterations)
+        {
+            Texture2D output = Utility.createSolidTexture(sb, Color.Blue); 
+            
+            if (isTrunk)
+            {
+                output = Utility.createSolidTexture(sb, Color.Brown);
+            }
+            else if (iteration < maxIterations) 
+            {
+                int colorSelector = Utility.randomInRange(1, 3);
+                switch (colorSelector)
+                {
+                    case 1:
+                        output = Utility.createSolidTexture(sb, Color.DarkGreen);
+                        break;
+                    case 2:
+                        output = Utility.createSolidTexture(sb, Color.OliveDrab);
+                        break;
+                    case 3:
+                        output = Utility.createSolidTexture(sb, Color.DarkOliveGreen);
+                        break;
+                }
+            }
+            else
+            {
+                output = Utility.createSolidTexture(sb, Color.ForestGreen);
+            }
+
+            return output;
         }
 
         private Vector2 calcBranchEndpoint()
