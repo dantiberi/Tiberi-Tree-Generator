@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace TiberiTreeGen
 {
@@ -11,13 +14,20 @@ namespace TiberiTreeGen
 
         Utility utility = new Utility(33);
 
-        Branch branch;
+        Branch trunk;
+
+        private static List<Drawable> toRender = new List<Drawable>();
 
         public Main()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+        }
+
+        public static void addToRenderList(Drawable element)
+        {
+            toRender.Add(element);
         }
 
         protected override void Initialize()
@@ -54,7 +64,10 @@ namespace TiberiTreeGen
             sb.Begin();
 
             // TODO: Add your drawing code here
-            branch.draw(gameTime, sb);
+            foreach (Drawable element in toRender)
+            {
+                element.draw(gameTime, sb);
+            }
 
             base.Draw(gameTime);
 
@@ -63,7 +76,17 @@ namespace TiberiTreeGen
 
         public void generateNewTrunk()
         {
-            branch = new Branch(false, new Vector2(sb.GraphicsDevice.PresentationParameters.Bounds.Width / 2, sb.GraphicsDevice.PresentationParameters.Bounds.Height), sb);
+            //Clear existing branches from memory
+            for(int i = 0; i < toRender.Count; i++)
+            {
+                toRender[i] = null;
+            }
+            toRender.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            //Generate new tree
+            trunk = new Branch(true, 0, 10, new Vector2(sb.GraphicsDevice.PresentationParameters.Bounds.Width / 2, sb.GraphicsDevice.PresentationParameters.Bounds.Height), sb);
         }
     }
 }
