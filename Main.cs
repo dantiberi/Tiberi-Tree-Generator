@@ -86,7 +86,7 @@ namespace TiberiTreeGen
             GC.WaitForPendingFinalizers();
 
             //Generate new tree
-            trunk = new Branch(true, 0, 10, new Vector2(sb.GraphicsDevice.PresentationParameters.Bounds.Width / 2, sb.GraphicsDevice.PresentationParameters.Bounds.Height), sb);
+            trunk = new Branch(true, 0, 8, new Vector2(sb.GraphicsDevice.PresentationParameters.Bounds.Width / 2, sb.GraphicsDevice.PresentationParameters.Bounds.Height), sb);
         }
     }
 }
