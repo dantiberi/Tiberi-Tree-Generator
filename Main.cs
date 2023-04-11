@@ -41,6 +41,11 @@ namespace TiberiTreeGen
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                branch = new Branch(false, sb);
+            }
+
             base.Update(gameTime);
         }
 
