@@ -17,8 +17,8 @@ namespace TiberiTreeGen
 
         Texture2D _texture;
 
-        public Branch(bool isTrunk, SpriteBatch sb) { 
-            xPos = 300; yPos = 300;
+        public Branch(bool isTrunk, Vector2 pos, SpriteBatch sb) {
+            position = pos;
 
             length = Utility.randomInRange(15, 100);
 
@@ -33,18 +33,20 @@ namespace TiberiTreeGen
 
         private Vector2 calcBranchEndpoint()
         {
-            float x = angle > Utility.degreeToRadian(90) ? xPos - length : xPos + length;
-            float y = angle < Utility.degreeToRadian(90) ? yPos - length : yPos + length;
+            float x = angle > Utility.degreeToRadian(90) ? position.X - length : position.X + length;
+            float y = angle < Utility.degreeToRadian(90) ? position.Y - length : position.Y + length;
 
-            float x1 = (float)(xPos + (x - xPos) * Math.Cos(angle) - (y - yPos) * Math.Sin(angle));
-            float y1 = (float)(yPos + (x - xPos) * Math.Sin(angle) + (y - yPos) * Math.Cos(angle));
+            float x1 = (float)(position.X + (x - position.X) * Math.Cos(angle) - (y - position.Y) * Math.Sin(angle));
+            float y1 = (float)(position.Y + (x - position.X) * Math.Sin(angle) + (y - position.Y) * Math.Cos(angle));
+
+            
 
             return new Vector2(x1, y1);
         }
 
         public override void draw(GameTime gameTime, SpriteBatch sb)
         {
-            Utility.drawLine(sb, _texture, new Vector2(xPos, yPos), calcBranchEndpoint());
+            Utility.drawLine(sb, _texture, new Vector2(position.X, position.Y), calcBranchEndpoint());
         }
 
         public override void load()

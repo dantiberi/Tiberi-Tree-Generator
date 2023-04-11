@@ -31,9 +31,7 @@ namespace TiberiTreeGen
         {
             sb = new SpriteBatch(GraphicsDevice);
 
-            branch = new Branch(false, sb); 
-
-            // TODO: use this.Content to load your game content here
+            generateNewTrunk();
         }
 
         protected override void Update(GameTime gameTime)
@@ -43,7 +41,7 @@ namespace TiberiTreeGen
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                branch = new Branch(false, sb);
+                generateNewTrunk();
             }
 
             base.Update(gameTime);
@@ -61,6 +59,11 @@ namespace TiberiTreeGen
             base.Draw(gameTime);
 
             sb.End();
+        }
+
+        public void generateNewTrunk()
+        {
+            branch = new Branch(false, new Vector2(sb.GraphicsDevice.PresentationParameters.Bounds.Width / 2, sb.GraphicsDevice.PresentationParameters.Bounds.Height), sb);
         }
     }
 }

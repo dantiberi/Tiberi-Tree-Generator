@@ -10,8 +10,7 @@ namespace TiberiTreeGen
 {
     public abstract class Drawable
     {
-        public float xPos { get; set; }
-        public float yPos { get; set; }
+        public Vector2 position;
 
         public abstract void draw(GameTime gameTime, SpriteBatch sb);
         public abstract void update(GameTime gameTime);
