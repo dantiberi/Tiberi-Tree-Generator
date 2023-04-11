@@ -13,17 +13,18 @@ namespace TiberiTreeGen
     {
         float length;
         float baseLength; // Triangle's bottom side length
-        float angle; // Radians. 90 = straight up
+        float angle; // Radians.
 
         Texture2D _texture;
 
         public Branch(bool isTrunk, SpriteBatch sb) { 
-            xPos = 200; yPos = 200;
+            xPos = 300; yPos = 300;
 
-            length = Utility.randomInRange(15, 200);
+            length = Utility.randomInRange(15, 100);
+
+            angle = !isTrunk ? angle = Utility.degreeToRadian(Utility.randomInRange(-135, 45)) : angle = 0f;
+
             baseLength = (float)(length * Math.Cos(angle));
-
-            angle = !isTrunk ? angle = Utility.degreeToRadian(Utility.randomInRange(0, 180)) : angle = 0f;
 
             _texture = Utility.createSolidTexture(sb, Color.Green);
 
