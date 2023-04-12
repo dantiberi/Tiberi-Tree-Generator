@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace TiberiTreeGen
 {
@@ -52,6 +53,7 @@ namespace TiberiTreeGen
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 generateNewTrunk();
+                Thread.Sleep(10);
             }
 
             base.Update(gameTime);
