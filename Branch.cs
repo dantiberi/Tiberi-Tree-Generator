@@ -31,9 +31,9 @@ namespace TiberiTreeGen
 
             //this.scale = (((float)maxIterations - (float)this.iteration) / (float)this.maxIterations) * 2;
             this.scale = (((float)maxIterations - (float)this.iteration) / (float)this.maxIterations) * ( 0.002f * (float)sb.GraphicsDevice.DisplayMode.Width);
-            length = Utility.randomInRange(15, 100) * scale;
+            length = Utility.RandomInRange(15, 100) * scale;
 
-            angle = isTrunk ? Utility.degreeToRadian(-45f) : Utility.degreeToRadian(Utility.randomInRange(-135, 45));
+            angle = isTrunk ? Utility.DegreeToRadian(-45f) : Utility.DegreeToRadian(Utility.RandomInRange(-135, 45));
 
             baseLength = (float)(length * Math.Cos(angle));
 
@@ -48,31 +48,31 @@ namespace TiberiTreeGen
 
         private Texture2D getBranchColor(bool isTrunk, SpriteBatch sb, int iteration, int maxIterations)
         {
-            Texture2D output = Utility.createSolidTexture(sb, Color.Blue); 
+            Texture2D output = Utility.CreateSolidTexture(sb, Color.Blue); 
             
             if (isTrunk)
             {
-                output = Utility.createSolidTexture(sb, Color.Brown);
+                output = Utility.CreateSolidTexture(sb, Color.Brown);
             }
             else if (iteration < maxIterations) //Middle branches
             {
-                int colorSelector = Utility.randomInRange(1, 3);
+                int colorSelector = Utility.RandomInRange(1, 3);
                 switch (colorSelector)
                 {
                     case 1:
-                        output = Utility.createSolidTexture(sb, Color.DarkGreen);
+                        output = Utility.CreateSolidTexture(sb, Color.DarkGreen);
                         break;
                     case 2:
-                        output = Utility.createSolidTexture(sb, Color.OliveDrab);
+                        output = Utility.CreateSolidTexture(sb, Color.OliveDrab);
                         break;
                     case 3:
-                        output = Utility.createSolidTexture(sb, Color.DarkOliveGreen);
+                        output = Utility.CreateSolidTexture(sb, Color.DarkOliveGreen);
                         break;
                 }
             }
             else //Last branch
             {
-                output = Utility.createSolidTexture(sb, Color.ForestGreen);
+                output = Utility.CreateSolidTexture(sb, Color.ForestGreen);
             }
 
             return output;
@@ -80,8 +80,8 @@ namespace TiberiTreeGen
 
         private Vector2 calcBranchEndpoint()
         {
-            float x = angle > Utility.degreeToRadian(90) ? position.X - length : position.X + length;
-            float y = angle < Utility.degreeToRadian(90) ? position.Y - length : position.Y + length;
+            float x = angle > Utility.DegreeToRadian(90) ? position.X - length : position.X + length;
+            float y = angle < Utility.DegreeToRadian(90) ? position.Y - length : position.Y + length;
 
             float x1 = (float)(position.X + (x - position.X) * Math.Cos(angle) - (y - position.Y) * Math.Sin(angle));
             float y1 = (float)(position.Y + (x - position.X) * Math.Sin(angle) + (y - position.Y) * Math.Cos(angle));
@@ -101,7 +101,7 @@ namespace TiberiTreeGen
 
         public override void draw(GameTime gameTime, SpriteBatch sb)
         {
-            Utility.drawLine(sb, _texture, new Vector2(position.X, position.Y), endPosition, 3f);
+            Utility.DrawLine(sb, _texture, new Vector2(position.X, position.Y), endPosition, 3f);
         }
 
         public override void load()
