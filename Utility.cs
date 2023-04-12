@@ -20,22 +20,22 @@ namespace TiberiTreeGen
             Utility.random = new Random();
         }
 
-        public static int randomInRange(int min, int max)
+        public static int RandomInRange(int min, int max)
         {
             return Utility.random.Next(min, max + 1);
         }
 
-        public static float degreeToRadian(float degree)
+        public static float DegreeToRadian(float degree)
         {
             return degree * (pi / 180);
         }
 
-        public static float radianToDegree(float radian)
+        public static float RadianToDegree(float radian)
         {
             return (radian * 180) / pi;
         }
 
-        public static void drawLine(SpriteBatch sb, Texture2D texture, Vector2 start, Vector2 end, float thickness)
+        public static void DrawLine(SpriteBatch sb, Texture2D texture, Vector2 start, Vector2 end, float thickness)
         {
             sb.Draw(texture, start, null, Color.White,
                              (float)Math.Atan2(end.Y - start.Y, end.X - start.X),
@@ -45,12 +45,17 @@ namespace TiberiTreeGen
 
         }
 
-        public static Texture2D createSolidTexture(SpriteBatch sb, Color color)
+        public static Texture2D CreateSolidTexture(SpriteBatch sb, Color color)
         {
             Texture2D _texture;
             _texture = new Texture2D(sb.GraphicsDevice, 1, 1);
             _texture.SetData(new Color[] { color });
             return _texture;
+        }
+
+        public static float DistanceBetween(Vector2 start, Vector2 end)
+        {
+            return (float)Math.Sqrt(Math.Pow(end.X - start.X, 2) + Math.Pow(end.Y - start.Y, 2));
         }
     }
 }
