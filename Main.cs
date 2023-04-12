@@ -34,8 +34,14 @@ namespace TiberiTreeGen
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
+
+            //_graphics.ToggleFullScreen();
+            _graphics.PreferredBackBufferWidth = sb.GraphicsDevice.DisplayMode.Width;
+            _graphics.PreferredBackBufferHeight = sb.GraphicsDevice.DisplayMode.Height;
+            _graphics.ApplyChanges();
+
+            
         }
 
         protected override void LoadContent()
@@ -88,7 +94,7 @@ namespace TiberiTreeGen
             GC.WaitForPendingFinalizers();
 
             //Generate new tree
-            trunk = new Branch(true, 0, 8, new Vector2(sb.GraphicsDevice.PresentationParameters.Bounds.Width / 2, sb.GraphicsDevice.PresentationParameters.Bounds.Height), sb);
+            trunk = new Branch(true, 0, 7, new Vector2(sb.GraphicsDevice.PresentationParameters.Bounds.Width / 2, sb.GraphicsDevice.PresentationParameters.Bounds.Height), sb);
         }
     }
 }
