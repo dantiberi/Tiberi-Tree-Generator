@@ -43,7 +43,7 @@ namespace TiberiTreeGen
 
             Main.addToRenderList(this);
 
-            if (iteration < maxIterations) growBranches(sb, 3);
+            if (iteration < maxIterations) growBranches(sb, 4);
         }
 
         private Texture2D getBranchColor(bool isTrunk, SpriteBatch sb, int iteration, int maxIterations)
