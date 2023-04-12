@@ -43,7 +43,7 @@ namespace TiberiTreeGen
 
             Main.addToRenderList(this);
 
-            if (iteration < maxIterations) growBranches(sb);
+            if (iteration < maxIterations) growBranches(sb, 3);
         }
 
         private Texture2D getBranchColor(bool isTrunk, SpriteBatch sb, int iteration, int maxIterations)
@@ -54,7 +54,7 @@ namespace TiberiTreeGen
             {
                 output = Utility.createSolidTexture(sb, Color.Brown);
             }
-            else if (iteration < maxIterations) 
+            else if (iteration < maxIterations) //Middle branches
             {
                 int colorSelector = Utility.randomInRange(1, 3);
                 switch (colorSelector)
@@ -70,7 +70,7 @@ namespace TiberiTreeGen
                         break;
                 }
             }
-            else
+            else //Last branch
             {
                 output = Utility.createSolidTexture(sb, Color.ForestGreen);
             }
@@ -91,9 +91,8 @@ namespace TiberiTreeGen
             return new Vector2(x1, y1);
         }
 
-        public void growBranches(SpriteBatch sb)
+        public void growBranches(SpriteBatch sb, int numberOfBranches)
         {
-            int numberOfBranches = 4;
             for( int i = 0; i < numberOfBranches; i++ )
             {
                 new Branch(false, iteration, maxIterations, endPosition, sb);
@@ -102,7 +101,7 @@ namespace TiberiTreeGen
 
         public override void draw(GameTime gameTime, SpriteBatch sb)
         {
-            Utility.drawLine(sb, _texture, new Vector2(position.X, position.Y), endPosition);
+            Utility.drawLine(sb, _texture, new Vector2(position.X, position.Y), endPosition, 3f);
         }
 
         public override void load()

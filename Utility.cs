@@ -35,12 +35,12 @@ namespace TiberiTreeGen
             return (radian * 180) / pi;
         }
 
-        public static void drawLine(SpriteBatch sb, Texture2D texture, Vector2 start, Vector2 end)
+        public static void drawLine(SpriteBatch sb, Texture2D texture, Vector2 start, Vector2 end, float thickness)
         {
             sb.Draw(texture, start, null, Color.White,
                              (float)Math.Atan2(end.Y - start.Y, end.X - start.X),
                              new Vector2(0f, (float)texture.Height / 2),
-                             new Vector2(Vector2.Distance(start, end), 3f),
+                             new Vector2(Vector2.Distance(start, end), thickness),
                              SpriteEffects.None, 0f);
 
         }
