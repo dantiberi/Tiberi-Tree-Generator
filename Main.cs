@@ -41,14 +41,12 @@ namespace TiberiTreeGen
             _graphics.PreferredBackBufferHeight = sb.GraphicsDevice.DisplayMode.Height;
             _graphics.ApplyChanges();
 
-            
+            generateNewTrunk();
         }
 
         protected override void LoadContent()
         {
             sb = new SpriteBatch(GraphicsDevice);
-
-            generateNewTrunk();
         }
 
         protected override void Update(GameTime gameTime)
@@ -65,6 +63,7 @@ namespace TiberiTreeGen
             base.Update(gameTime);
         }
 
+        //int drawCount;
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -76,6 +75,15 @@ namespace TiberiTreeGen
             {
                 element.draw(gameTime, sb);
             }
+
+            /*
+            drawCount++;
+            if(drawCount > 200)
+            {
+                drawCount = 0;
+                generateNewTrunk();
+            }
+            */
 
             base.Draw(gameTime);
 
