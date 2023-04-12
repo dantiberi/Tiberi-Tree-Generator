@@ -2,10 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TiberiTreeGen
@@ -18,6 +20,7 @@ namespace TiberiTreeGen
         public Vector2 endPosition;
         int maxIterations;
         int iteration;
+        float scale;
 
         Texture2D _texture;
 
@@ -26,7 +29,9 @@ namespace TiberiTreeGen
             this.iteration = iteration + 1;
             this.maxIterations = maxIterations;
 
-            length = Utility.randomInRange(15, 75);
+            this.scale = (((float)maxIterations - (float)this.iteration) / (float)this.maxIterations) * 2;
+
+            length = Utility.randomInRange(15, 75) * scale;
 
             angle = isTrunk ? Utility.degreeToRadian(-45f) : Utility.degreeToRadian(Utility.randomInRange(-135, 45));
 
@@ -88,7 +93,7 @@ namespace TiberiTreeGen
 
         public void growBranches(SpriteBatch sb)
         {
-            int numberOfBranches = 2;
+            int numberOfBranches = 3;
             for( int i = 0; i < numberOfBranches; i++ )
             {
                 new Branch(false, iteration, maxIterations, endPosition, sb);
