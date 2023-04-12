@@ -29,9 +29,9 @@ namespace TiberiTreeGen
             this.iteration = iteration + 1;
             this.maxIterations = maxIterations;
 
-            this.scale = (((float)maxIterations - (float)this.iteration) / (float)this.maxIterations) * 2;
-
-            length = Utility.randomInRange(15, 75) * scale;
+            //this.scale = (((float)maxIterations - (float)this.iteration) / (float)this.maxIterations) * 2;
+            this.scale = (((float)maxIterations - (float)this.iteration) / (float)this.maxIterations) * ( 0.002f * (float)sb.GraphicsDevice.DisplayMode.Width);
+            length = Utility.randomInRange(15, 100) * scale;
 
             angle = isTrunk ? Utility.degreeToRadian(-45f) : Utility.degreeToRadian(Utility.randomInRange(-135, 45));
 
@@ -93,7 +93,7 @@ namespace TiberiTreeGen
 
         public void growBranches(SpriteBatch sb)
         {
-            int numberOfBranches = 3;
+            int numberOfBranches = 4;
             for( int i = 0; i < numberOfBranches; i++ )
             {
                 new Branch(false, iteration, maxIterations, endPosition, sb);
